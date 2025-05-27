@@ -1,5 +1,8 @@
 package model.chesslayer.entitie;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.boardlayer.entitie.Board;
 import model.boardlayer.entitie.Piece;
 import model.boardlayer.entitie.Position;
@@ -12,6 +15,9 @@ public class ChessMatch {
     private Board board;
     private Color currentPlayer;
     private int turn;
+
+    private List<Piece> piecesOnTheBoard = new ArrayList<>();
+    private List<Piece> capturedPieces = new ArrayList<>();
 
     public ChessMatch() {
         board = new Board(8, 8);
@@ -59,6 +65,11 @@ public class ChessMatch {
         Piece piece = board.removePiece(source);
         Piece capturedPiece = board.removePiece(target);
         board.placePiece(piece, target);
+        
+        if (capturedPiece != null) {
+            piecesOnTheBoard.remove(capturedPiece);
+            capturedPieces.add(capturedPiece);
+        }
         return capturedPiece;   
     }
 
@@ -87,6 +98,7 @@ public class ChessMatch {
 
     private void placeNewPiece(char column, int row, ChessPiece piece) {
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
+        piecesOnTheBoard.add(piece);
     }
 
     private void initialSetup() {
