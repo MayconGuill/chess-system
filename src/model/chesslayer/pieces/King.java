@@ -75,6 +75,6 @@ public class King extends ChessPiece {
             assistant[assistantPosition.getRow()][assistantPosition.getColumn()] = true;
         }
 
-        return assistant ;
+        return assistant;
     }
 }
