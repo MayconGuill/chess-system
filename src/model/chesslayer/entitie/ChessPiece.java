@@ -2,6 +2,7 @@ package model.chesslayer.entitie;
 
 import model.boardlayer.entitie.Board;
 import model.boardlayer.entitie.Piece;
+import model.boardlayer.entitie.Position;
 import model.chesslayer.enums.Color;
 
 public abstract class ChessPiece extends Piece{
@@ -14,5 +15,10 @@ public abstract class ChessPiece extends Piece{
 
     public Color getColor() {
         return color;
+    }
+
+    protected boolean isThereOpponentPiece(Position position) {
+        ChessPiece chessPiece = (ChessPiece) getBoard().piece(position);
+        return chessPiece != null && chessPiece.getColor() != color;
     }
 }
